@@ -47,7 +47,47 @@ namespace DEVinBank.App.Entidades
         {
             foreach (var transacao in Transacoes)
             {
-                Console.WriteLine(transacao);
+                if(transacao is Saque)
+                    Console.WriteLine(
+                    new string('*', 35) + "\n" +
+                    "\n" +
+                    "Detalhes da transação:\n" +
+                    "\n" +
+                    "Tipo de transação: Saque\n" +
+                    "Valor: " + transacao.Valor + "\n" +
+                    "Data: " + transacao.DataTransacao + "\n");
+                 
+                if(transacao is Deposito)
+                    Console.WriteLine(
+                    new string('*', 35) + "\n" +
+                    "\n" +
+                    "Detalhes da transação:\n" +
+                    "\n" +
+                    "Tipo de transação: Depósito\n" +
+                    "Valor: " + transacao.Valor + "\n" +
+                    "Data: " + transacao.DataTransacao + "\n");
+                
+                if(transacao is Transferencia)
+                    Console.WriteLine(
+                    new string('*', 35) + "\n" +
+                    "\n" +
+                    "Detalhes da transação:\n" +
+                    "\n" +
+                    "Tipo de transação: Transferência\n" +
+                    "Valor: " + transacao.Valor + "\n" +
+                    $"Conta Destino: {((Transferencia)transacao).ContaDestino.NumeroConta}\n" +
+                    "Data: " + transacao.DataTransacao + "\n");
+
+                if (transacao is Investimento)
+                    Console.WriteLine(
+                    new string('*', 35) + "\n" +
+                    "\n" +
+                    "Detalhes da transação:\n" +
+                    "\n" +
+                    "Tipo de transação: Investimento\n" +
+                    "Valor aplicado: " + transacao.Valor + "\n" +
+                    "Data: " + transacao.DataTransacao + "\n" +
+                    $"Data mínima resgate: {((Investimento)transacao).DataResgate}" + "\n");
             }
         }
         public void AlterarDados(string nome, string endereco, double renda, AgenciaEnum agencia)
