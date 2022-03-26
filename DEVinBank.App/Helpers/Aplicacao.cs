@@ -1,8 +1,9 @@
 ﻿namespace DEVinBank.App.Helpers
 {
-    public class Aplicacao
+    public static class Aplicacao
     {
-        public static string RecebeComando()
+        public static DateOnly DataSistema = DateOnly.FromDateTime(DateTime.Now);
+        public static string RecebeResposta()
         {
             Console.Write("> ");
             var resposta = Console.ReadLine();

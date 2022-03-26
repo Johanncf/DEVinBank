@@ -7,30 +7,55 @@ using static DEVinBank.App.Enums.Enumerators;
 
 namespace DEVinBank.App.Entidades
 {
-    public abstract class Conta
+    public abstract class Conta : EntidadeBase
     {
-        private static string _numeroConta = "0000";
-        public string NumeroConta { get; private set; }
-        public string Nome  { get; }
+        public string NumeroConta { get; protected set; }
+        public string Nome  { get; protected set; }
         public string CPF { get; }
-        public string Endereco { get; }
-        public double RendaMensal { get; }
-        public AgenciaEnum Agencia { get; set; }
-        public double Saldo { get; set; }
+        public string Endereco { get; protected set; }
+        public double RendaMensal { get; protected set; }
+        public AgenciaEnum Agencia { get; protected set; }
+        protected double _saldo { get; set; }
+        public IList<Transacao> Transacoes { get; set; }
 
         public Conta(string nome, string cpf, string endereco, double rendaMensal, 
-            AgenciaEnum agencia, double saldo = 0)
+            string numeroConta, AgenciaEnum agencia, double saldo = 0) : base(numeroConta)
         {
             Nome = nome;
             CPF = cpf;
             Endereco = endereco;    
             RendaMensal = rendaMensal;
             Agencia = agencia;
-            Saldo = saldo;
+            _saldo = saldo;
+            NumeroConta = numeroConta;
 
-            _numeroConta = (Convert.ToInt32(_numeroConta) + 1).ToString("X4");
-            NumeroConta = _numeroConta;
+            Transacoes = new List<Transacao>();  
         }
 
+        public virtual void Sacar(double valor)
+        {
+            if (valor <= _saldo)
+                _saldo -= valor;
+            else throw new Exception("Saldo insuficiente.");
+        }
+        public void Depositar(double valor)
+        {
+            _saldo += valor;
+        }
+        public double Saldo => _saldo;
+        public void GetExtrato()
+        {
+            foreach (var transacao in Transacoes)
+            {
+                Console.WriteLine(transacao);
+            }
+        }
+        public void AlterarDados(string nome, string endereco, double renda, AgenciaEnum agencia)
+        {
+            Nome = nome;
+            Endereco = endereco;
+            RendaMensal = renda;
+            Agencia = agencia;
+        }
     }
 }

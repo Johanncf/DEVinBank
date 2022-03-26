@@ -10,7 +10,27 @@ namespace DEVinBank.App.Enums
     {
         public enum AgenciaEnum
         {
-            Florianopolis = 001, SaoJose = 002, Biguacu = 003
+            Florianopolis = 1, SaoJose, Biguacu
+        }
+
+        public enum TransacaoEnum
+        {
+            Saque,
+            Deposito,
+            Investimento
+        }
+        public enum TipoContaEnum
+        {
+            Corrente,
+            Poupanca,
+            Investimento
+        }
+
+        public enum TipoInvestimentoEnum
+        {
+            LCI, 
+            LCA,
+            CDB
         }
     }
 }

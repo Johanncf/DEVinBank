@@ -10,25 +10,39 @@ namespace DEVinBank.App.Helpers
 {
     public class Mensagens
     {
-        public static void Erro(Exception ex)
+        public static void DEVinBank(string mensagem)
         {
-            System.Console.ForegroundColor = ConsoleColor.Red;
-            System.Console.WriteLine("[ERROR]: " + ex.Message + "\n");
-            System.Console.ResetColor();
+            Console.ForegroundColor = ConsoleColor.Blue;
+            Console.WriteLine($"[DEVinBank]: {mensagem}\n");
+            Console.ResetColor();
+        }
+        
+        public static void Erro(string mensagem)
+        {
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine("[ERRO]: " + mensagem + "\n");
+            Console.ResetColor();
         }
 
         public static void ProcessoFinalizado()
         {
-            System.Console.ForegroundColor = ConsoleColor.Blue;
-            System.Console.WriteLine("[FIM]: O DEVinBank agradece pelo interesse. Até mais!\n");
-            System.Console.ResetColor();
+            Console.ForegroundColor = ConsoleColor.Blue;
+            Console.WriteLine("[FIM]: O DEVinBank agradece pelo interesse. Até mais!\n");
+            Console.ResetColor();
         }
-
         public static void ContaCriada(Conta conta, string tipoConta)
         {
             Console.ForegroundColor = ConsoleColor.Green;
-            Console.WriteLine($"Parabéns {conta.Nome}. Você acaba de criar uma {tipoConta} no DEVinBank" +
-                                $" na agencia {conta.Agencia}.\n");
+            Console.WriteLine($"Parabéns {conta.Nome.Split(" ").ToList()[0]}! Você acaba de criar uma {tipoConta} no DEVinBank.\n\n" +
+                                $"Dados da sua conta:\n" +
+                                $"\tAgência - {(int)conta.Agencia:X3} ({conta.Agencia})\n" +
+                                $"\tConta - {conta.NumeroConta}\n\n");
+            Console.ResetColor();
+        }
+        public static void OperacaoRealizadaComSucesso(string mensagem)
+        {
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.WriteLine(mensagem);    
             Console.ResetColor();
         }
         
