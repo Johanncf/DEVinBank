@@ -184,7 +184,7 @@ suas características:</p>
       Operações realizadas pelo sistema, ou seja, não dependem necessariamente de uma conta de partida. Essas operações são executadas através do menu principal da aplicação. Exs.: "Listar contas negativadas", "Total de investimentos no DEVinBank", "Depósito".
     </li>
     <li>
-      Operações realizadas por uma conta específica. São executadas a partir do menu "Minha Conta", que pede o número da conta para o acesso. Exs.: "Saque", "Transferência", "Depósito" (depósito é a única operação que pode ser realizada por ambas as rota).
+      Operações realizadas por uma conta específica. São executadas a partir do menu "Minha Conta", que pede o número da conta para o acesso. Exs.: "Saque", "Transferência", "Depósito" (depósito é a única operação que pode ser realizada por ambas as rotas).
     </li>
   </ul>
   <li>
