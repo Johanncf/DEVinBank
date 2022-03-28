@@ -357,8 +357,14 @@ namespace DEVinBank.App.Engines
 
             Aplicacao.DataSistema = DateOnly.FromDateTime(DateTime.Now);
         }
-        public double TotalInvestimentosDEVinBank() => _gerenciadorDeTransacoes.Elementos
-                .Where(e => e is Investimento).Sum(e => e.Valor);
+        public void TotalInvestimentosDEVinBank()
+        {
+            double total = _gerenciadorDeTransacoes.Elementos.Where(e => e is Investimento).Sum(e => e.Valor);
+            Mensagens.DEVinBank(
+            $"O valor total investido no DEVinHouse é de:\n" +
+            $"\n" +
+            $"{total:C2}\n");
+        }
         public void RealizarDeposito()
         {
             Console.Write("Número da conta: ");
@@ -380,6 +386,47 @@ namespace DEVinBank.App.Engines
 
             Mensagens.OperacaoRealizadaComSucesso(
                 $"Depósito de {valor} realizado.\n");
+        }
+        public void Listar()
+        {
+            var elementos = _gerenciadorDeContas.Elementos;
+            if (elementos.Count == 0)
+            {
+                Mensagens.DEVinBank("Não existem contas ativas no DEVinBank no momento.\n");
+                return;
+            }
+            Console.WriteLine("Contas ativas do DEVinBank:\n");
+            foreach (Conta conta in elementos)
+            {
+                Console.WriteLine(
+                    new string('*', 35) + "\n" +
+                    "\n" +
+                    "Cliente: " + conta.Nome + "\n" +
+                    "CPF: " + conta.CPF + "\n" +
+                    "Agência: " + $"{((int)conta.Agencia):X3} ({conta.Agencia})\n" +
+                    "N° da Conta: " + conta.NumeroConta + "\n" +
+                    "Tipo da Conta: " + _gerenciadorDeContas.RetornaTipoDeConta(conta) + "\n"
+                    );
+            }
+        }
+        public void ListarContasNegativadas()
+        {
+            var elementos = _gerenciadorDeContas.Elementos;
+            if (!elementos.Any(conta => conta.Saldo < 0))
+                Mensagens.DEVinBank("Não existem contas negativadas no DEVinBank no momento.\n");
+
+            foreach (ContaCorrente conta in elementos.Where(conta => conta.Saldo < 0))
+            {
+                Console.WriteLine(
+                    new string('*', 35) + "\n" +
+                    "\n" +
+                    "Cliente: " + conta.Nome + "\n" +
+                    "CPF: " + conta.CPF + "\n" +
+                    "Agência: " + $"{(int)conta.Agencia:X3} ({conta.Agencia})\n" +
+                    "N° da Conta: " + conta.NumeroConta + "\n" +
+                    "Tipo da Conta: " + _gerenciadorDeContas.RetornaTipoDeConta(conta) + "\n"
+                    );
+            }
         }
     }
 }

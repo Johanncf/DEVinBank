@@ -2,6 +2,8 @@
 using DEVinBank.App.Repositorios;
 using DEVinBank.Sistema;
 
+#region Injeção de dependências
+
 ContasRepository gerenciadorDeContas = new ContasRepository();
 TransacoesRepository gerenciadorDeTransacoes = new TransacoesRepository();  
 
@@ -10,6 +12,8 @@ OperacoesEngine operacoes = new OperacoesEngine(gerenciadorDeContas, gerenciador
 MinhaContaEngine minhaConta = new MinhaContaEngine(gerenciadorDeContas, operacoes);        
 
 SistemaFinanceiro sistema = new SistemaFinanceiro(criadorDeConta, minhaConta, gerenciadorDeContas, operacoes);
+
+#endregion
 
 #region Iniciando atendimento e interagindo com o usuário
 
@@ -21,9 +25,6 @@ while (!finalizado)
 {
     finalizado = sistema.ProximaOperacao();
 }
-
-
-DateOnly data1 = new DateOnly();
 
 
 

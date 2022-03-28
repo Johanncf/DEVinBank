@@ -18,7 +18,9 @@ namespace DEVinBank.App.Interfaces
         public void SimularRendimento(ContaPoupanca conta);
         public void SimularInvestimento(ContaInvestimento conta);
         public void SimularResgate(ContaInvestimento conta);
-        public double TotalInvestimentosDEVinBank();
+        public void TotalInvestimentosDEVinBank();
         public void RealizarDeposito();
+        public void Listar();
+        public void ListarContasNegativadas();
     }
 }

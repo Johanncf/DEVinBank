@@ -14,7 +14,6 @@ namespace DEVinBank.Sistema
     {
         private readonly ICriacaoContaEngine _criadorDeConta;
         private readonly IMinhaContaEngine _minhaConta;   
-        private readonly IContasRepository _gerenciadorDeContas;
         private readonly IOperacoesEngine _operacoes;   
 
         public DateOnly DataSistema { get; private set; }  
@@ -31,7 +30,13 @@ namespace DEVinBank.Sistema
 
         public bool BoasVindas()
         {
-            Console.WriteLine("\n\n\nOlá! Bem-vindo(a) ao DEVinBank.\n");
+            Console.WriteLine("\n" +
+                new string('*', 26) + "\n" +
+                "*" + new string(' ', 24) + "*\n" +
+                $"* DEVinBank - {Aplicacao.DataSistema} *" + "\n" +
+                "*" + new string(' ', 24) + "*\n" +
+                new string('*', 26) + "\n" +
+                "\n\nOlá! Bem-vindo(a) ao DEVinBank.\n");
             return MostrarMenuOpcoes();
         }
 
@@ -76,16 +81,13 @@ namespace DEVinBank.Sistema
                         _criadorDeConta.GetTipoConta();
                         break;
                     case "2":
-                        _gerenciadorDeContas.Listar();
+                        _operacoes.Listar();
                         break;
                     case "3":
-                        _gerenciadorDeContas.ListarContasNegativadas();
+                        _operacoes.ListarContasNegativadas();
                         break;
                     case "4":
-                        Console.WriteLine($"" +
-                            $"O valor total investido no DEVinHouse é de:\n" +
-                            $"\n" +
-                            $"{_operacoes.TotalInvestimentosDEVinBank():C2}\n");
+                        _operacoes.TotalInvestimentosDEVinBank();
                         break;
                     case "5":
                         bool finalizado = _minhaConta.Acessar();

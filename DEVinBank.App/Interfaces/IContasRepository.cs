@@ -9,8 +9,6 @@ namespace DEVinBank.App.Interfaces
 {
     public interface IContasRepository : IBaseRepository<Conta>
     {
-        public void Listar();
-        public void ListarContasNegativadas();
         public string RetornaTipoDeConta(Conta conta);
     }
 }
